@@ -7,7 +7,7 @@ print("abs() is a built-in function: ", abs(-34), "\n")
 print("math.sqrt(4): ", m.sqrt(4))
 print("math.pow(2, 3): ", m.pow(2, 3), "\n")
 
-print("'//' - modulus, 4//3: ", 4 // 3)
+print("'// (or %)' - modulus, 4//3: ", 4 // 3)
 print("'**' - exponent, 2//3: ", 2 ** 3, "\n")
 
 print("0b prefix defines binary numbers, 0b10: ", 0b10)
