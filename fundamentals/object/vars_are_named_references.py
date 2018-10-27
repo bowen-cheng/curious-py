@@ -1,7 +1,4 @@
-def print_list(input_list):
-    for val in input_list:
-        print(val)
-
+from fundamentals.notes_utils import print_items
 
 # All variables are named references to objects
 a = [1, 2, 3]
@@ -10,7 +7,7 @@ b = a
 # This actually modifies the underlying object
 b[0] = 4
 # prints 4, 2, 3 because a and b points to the same underlying object
-print_list(a)
+print_items(a)
 # prints True since id() deals with object and a and b are just named references to the same object
 print(id(a) == id(b))
 
@@ -21,7 +18,7 @@ def modify_argument(argument, my_sep="------"):
     argument[0] = 100
     # prints 100, 2, 3
     print(my_sep)
-    print_list(a)
+    print_items(a)
     print(my_sep)
 
 
