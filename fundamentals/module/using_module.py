@@ -1,6 +1,6 @@
 #!/usr/local/bin/python3
 # The shebang above identifies which python executable should be used when running this file as an executable file
-# E.g. ./using_module.py, instead of python3 ./using_module.py
+# E.g. Run as python3 ./using_module.py, instead of python ./using_module.py
 
 # different style of importing modules
 from fundamentals.module.my_functions import launch_missile
@@ -10,5 +10,5 @@ import my_functions
 import math as m
 
 print("launch_missile():", launch_missile())
-
 print("even_or_odd(3):", my_functions.even_or_odd(3))
+print("m.sin(45):", m.sin(45))

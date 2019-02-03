@@ -35,4 +35,3 @@ print("\n'Abby' in age_dict:", 'Abby' in age_dict)
 # use del keyword to remove item from a dict
 del age_dict['Abby']
 print("\ndel age_dict['Abby']:", age_dict)
-
