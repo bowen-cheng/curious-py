@@ -1,3 +1,6 @@
+from pprint import pprint
+
+
 class EmptyClass:
     """
     By convention, class names are in CamelCase
@@ -61,18 +64,23 @@ class Flight:
         self._flight_number = f_number
         self._aircraft = aircraft
 
+        # tuple unpacking
+        rows, seats = self._aircraft.searing_plan()
+        # Initialize seating plan using dictionary comprehension nested inside a list comprehension
+        # Use a dummy value at position 0 in the list to for the fact that seating plan starts from 1st row
+        self._seating = [None] + [{letter: None for letter in seats} for _ in rows]
+
     def flight_number(self):  # method names are separated by an underscore: _
         return self._flight_number
 
     def model(self):
         return self._aircraft.model()
 
+    def seating(self):
+        return self._seating
+
 
 flight = Flight("CA160", ac)
-flight2 = Flight("CA180", ac)
 print("flight.flight_number():", flight.flight_number())
-print("flight2.flight_number():", flight2.flight_number())
 print("flight.model():", flight.model())
-print("flight2.model():", flight2.model())
-
-
+pprint(flight.seating())

@@ -2,11 +2,11 @@ from math import factorial, sqrt
 
 
 def is_prime(x):
-    '''
+    """
     Demo purpose, not efficient at all
     :param x:
     :return:
-    '''
+    """
     if x < 2:
         return False
     for i in range(2, int(sqrt(x)) + 1):

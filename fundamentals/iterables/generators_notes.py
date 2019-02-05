@@ -8,10 +8,10 @@
 
 
 def gen123():
-    '''
+    """
     Each time next() is called, the function runs up to and including the yield statement
     :return:
-    '''
+    """
     print('about to yield 1')
     yield 1
     print('about to yield 2')
