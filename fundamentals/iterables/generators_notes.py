@@ -10,6 +10,7 @@
 def gen123():
     """
     Each time next() is called, the function runs up to and including the yield statement
+    The state of the function is “saved” from the last call and can be picked up the next time
     :return:
     """
     print('about to yield 1')
