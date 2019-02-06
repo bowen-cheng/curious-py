@@ -27,14 +27,14 @@ class Aircraft:
     def model(self):
         return self._model
 
-    def searing_plan(self):
+    def seating_plan(self):
         # if we return multiple objects, it is actually a tuple of objects
         return range(1, self._num_rows + 1), "ABCDEFGHJ"[:self._num_seats_per_row]
 
 
 ac = Aircraft("REG", "Boeing 777", num_rows=23, num_seats_per_row=6)
 print("ac.model():", ac.model())
-print("ac.searing_plan():", ac.searing_plan(), "\n")
+print("ac.seating_plan():", ac.seating_plan(), "\n")
 
 
 class Flight:
@@ -65,22 +65,54 @@ class Flight:
         self._aircraft = aircraft
 
         # tuple unpacking
-        rows, seats = self._aircraft.searing_plan()
+        rows, seats = self._aircraft.seating_plan()
         # Initialize seating plan using dictionary comprehension nested inside a list comprehension
         # Use a dummy value at position 0 in the list to for the fact that seating plan starts from 1st row
+        # Note that the list items don't have to be the same type
         self._seating = [None] + [{letter: None for letter in seats} for _ in rows]
 
     def flight_number(self):  # method names are separated by an underscore: _
         return self._flight_number
 
-    def model(self):
+    def aircraft_model(self):
         return self._aircraft.model()
 
-    def seating(self):
-        return self._seating
+    def allocate_seat(self, seat: str, passenger: str):
+        """
+        Allocate a seat to a passenger
+        :param seat: A seat designator, such as '12C' or '21F'
+        :param passenger: The passenger's name
+        """
+        rows, seat_letters = self._aircraft.seating_plan()
+
+        # Validate column letter
+        row_letter = seat[-1]
+        if row_letter not in seat_letters:
+            raise ValueError("Invalid seat letter: {}".format(row_letter))
+
+        # Validate row number
+        row_num_str = seat[:-1]
+        try:
+            # Python uses function scope (LEGB rule), blocks like try-catch and if-else does not have their own scope
+            # row_num var is declared in a tye-catch block, but can be accessed outside of the block
+            row_num = int(row_num_str)
+        except ValueError:
+            raise ValueError("Invalid row number: {}".format(row_num_str))
+        if row_num not in rows:
+            raise ValueError("Invalid row number: {}".format(row_num_str))
+        if self._seating[row_num][row_letter] is not None:
+            raise ValueError("The seat is already occupied: {}".format(seat))
+        self._seating[row_num][row_letter] = passenger
 
 
 flight = Flight("CA160", ac)
 print("flight.flight_number():", flight.flight_number())
-print("flight.model():", flight.model())
-pprint(flight.seating())
+print("flight.model():", flight.aircraft_model())
+
+flight.allocate_seat("21A", "John")
+flight.allocate_seat("22A", "Bill")
+flight.allocate_seat("23A", "Anna")
+pprint(flight._seating)  # All properties in classes are public in Python. Protected properties names are prefixed by _.
+# flight.allocate_seat("23A", "Kate")  # Seat occupied error
+# flight.allocate_seat("25A", "Walter")  # Invalid row number
+# flight.allocate_seat("2Z", "Walter")  # Invalid row letter
