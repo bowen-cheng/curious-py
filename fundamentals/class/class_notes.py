@@ -1,7 +1,7 @@
 from pprint import pprint
 
 
-class EmptyClass:
+class MyEmptyClass:
     """
     By convention, class names are in CamelCase
     """
@@ -9,8 +9,8 @@ class EmptyClass:
 
 
 # flight = Flight() <- error, class Flight is not yet defined
-empty = EmptyClass()  # create a new object doesn't need new keyword like Java
-print("type(empty):", type(empty), "\n")
+empty = MyEmptyClass()  # create a new object doesn't need new keyword like Java
+print("type(MyEmptyClass()):", type(empty), "\n")
 
 
 class Aircraft:
@@ -29,10 +29,10 @@ class Aircraft:
 
     def seating_plan(self):
         # if we return multiple objects, it is actually a tuple of objects
-        return range(1, self._num_rows + 1), "ABCDEFGHJ"[:self._num_seats_per_row]
+        return range(1, self._num_rows + 1), "ABC"[:self._num_seats_per_row]
 
 
-ac = Aircraft("REG", "Boeing 777", num_rows=23, num_seats_per_row=6)
+ac = Aircraft("REG", "Bowen 777", num_rows=3, num_seats_per_row=3)
 print("ac.model():", ac.model())
 print("ac.seating_plan():", ac.seating_plan(), "\n")
 
@@ -83,6 +83,18 @@ class Flight:
         :param seat: A seat designator, such as '12C' or '21F'
         :param passenger: The passenger's name
         """
+        row_num, row_letter = self._parse_seat(seat)
+
+        if self._seating[row_num][row_letter] is not None:
+            raise ValueError("The seat is already occupied: {}".format(seat))
+        self._seating[row_num][row_letter] = passenger
+
+    def _parse_seat(self, seat):
+        """
+        parse a seat designator into a valid row and letter
+        :param seat: A seat designator such 20B
+        :return: A tuple containing an interger and a string for row and seat
+        """
         rows, seat_letters = self._aircraft.seating_plan()
 
         # Validate column letter
@@ -100,19 +112,45 @@ class Flight:
             raise ValueError("Invalid row number: {}".format(row_num_str))
         if row_num not in rows:
             raise ValueError("Invalid row number: {}".format(row_num_str))
-        if self._seating[row_num][row_letter] is not None:
-            raise ValueError("The seat is already occupied: {}".format(seat))
-        self._seating[row_num][row_letter] = passenger
+        return row_num, row_letter
+
+    def relocate_passenger(self, from_seat, to_seat):
+        """
+        Relocate a passenger from a seat to another seat.
+        :param from_seat: The existing seat designator for hte passenger to be moved
+        :param to_seat: The new seat designator
+        """
+        from_row, from_letter = self._parse_seat(from_seat)
+
+        if self._seating[from_row][from_letter] is None:
+            raise ValueError("No passenger is currently seated at {}".format(from_seat))
+        to_row, to_letter = self._parse_seat(to_seat)
+        if self._seating[to_row][to_letter] is not None:
+            raise ValueError("Seated {} is not available".format(to_seat))
+
+        self._seating[to_row][to_letter] = self._seating[from_row][from_letter]
+        self._seating[from_row][from_letter] = None
+
+    def num_available_seats(self):
+        # Use nested generator comprehension to calculate all empty seats
+        return sum(
+            sum(1 for row_letter in row if row[row_letter] is None)  # Sum up available seats in one row
+            for row in self._seating if row is not None)  # Sum up available seats in all row, skipping dummy first row
 
 
 flight = Flight("CA160", ac)
 print("flight.flight_number():", flight.flight_number())
-print("flight.model():", flight.aircraft_model())
+print("flight.model():", flight.aircraft_model(), "\n")
 
-flight.allocate_seat("21A", "John")
-flight.allocate_seat("22A", "Bill")
-flight.allocate_seat("23A", "Anna")
+flight.allocate_seat("1A", "John")
+flight.allocate_seat("2A", "Bill")
+flight.allocate_seat("3A", "Anna")
+print("John -> 1A, Bill -> 2A, Anna -> 3A")
 pprint(flight._seating)  # All properties in classes are public in Python. Protected properties names are prefixed by _.
-# flight.allocate_seat("23A", "Kate")  # Seat occupied error
-# flight.allocate_seat("25A", "Walter")  # Invalid row number
+# flight.allocate_seat("3A", "Kate")  # Seat occupied error
+# flight.allocate_seat("5A", "Walter")  # Invalid row number
 # flight.allocate_seat("2Z", "Walter")  # Invalid row letter
+flight.relocate_passenger("3A", "3B")
+print("Passenger at 3A is relocated to 3B")
+pprint(flight._seating)
+print("flight.num_available_seats()", flight.num_available_seats())
