@@ -1,0 +1,4 @@
+This is a sample file for reading and writing
+This text is on the second line
+
+There is a blank line before me.

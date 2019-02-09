@@ -1,0 +1,2 @@
+Output lines without new line. Output lines with new line
+Last line of the file
