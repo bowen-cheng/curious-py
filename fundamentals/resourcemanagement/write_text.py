@@ -11,4 +11,15 @@ new_file.write('Output lines with new line\n')
 new_file.write('Last line of the file\n')
 
 # close the file once we are done writing to it
+# Calling close() is required to actually write the data
 new_file.close()
+
+# Mode: Append Text
+append_file = open('sample.txt', mode='at', encoding='utf-8')
+# Use writelines to append an iterable series of strings at the end of the file
+append_file.writelines([
+    "First line appended\n",
+    "Second line, ",
+    "Still second line"
+])
+append_file.close()
