@@ -53,9 +53,9 @@ print("\n(a, (b, (c, d))) = (1, (2, (3, 4)))")
 print("a,b,c,d: ", a, b, c, d)
 
 # idiomatic Python swap
-a, b = b, a
 print("\na, b:", a, b)
 print("a, b = b, a")
+a, b = b, a
 print("a, b:", a, b)
 
 # tuple constructor can create tuples from any iterable series

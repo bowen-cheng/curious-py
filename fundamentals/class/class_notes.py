@@ -16,6 +16,15 @@ print("type(MyEmptyClass()):", type(empty))
 class Aircraft:
 
     def __init__(self, registration, model, num_rows, num_seats_per_row):
+        """
+        The instance attribute of the class does not need to be declared explicitly
+        They are created the moment a value is assigned
+        Assigning values in other class function also creates instance attributes but it's not recommended
+        :param registration:
+        :param model:
+        :param num_rows:
+        :param num_seats_per_row:
+        """
         self._registration = registration
         self._model = model
         self._num_rows = num_rows
