@@ -91,7 +91,7 @@ class Trace:
         def wrap(*args, **kwargs):
             if self.enabled:
                 print("Tracing: calling {}".format(func))
-            func(*args, **kwargs)
+            return func(*args, **kwargs)
 
         return wrap
 
@@ -111,3 +111,18 @@ def print_words2():
 
 print_words()
 print_words2()
+print("\n------------------\n")
+
+
+@ClassDecorator
+@tracer
+@function_decorator
+def multiple_decorator(x):
+    """
+    Multiple decorators are processed one by one from bottom to top, passing each resulting callable to the next one
+    """
+    return x
+
+
+print(multiple_decorator("¥©çΩ≈"))
+print(multiple_decorator.count)  # count exists because the @ClassDecorator is the last decorator processed
