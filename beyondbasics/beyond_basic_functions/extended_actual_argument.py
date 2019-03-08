@@ -18,7 +18,7 @@ print_args(my_tuple)
 print("\n--- print_args(*my_tuple) ---")
 print_args(*my_tuple)
 
-print("\n=========================\n")
+print("\n--------------\n")
 
 
 def print_kwargs(red, **kwargs):

@@ -126,7 +126,7 @@ class Flight:
     def relocate_passenger(self, from_seat, to_seat):
         """
         Relocate a passenger from a seat to another seat.
-        :param from_seat: The existing seat designator for hte passenger to be moved
+        :param from_seat: The existing seat designator for the passenger to be moved
         :param to_seat: The new seat designator
         """
         from_row, from_letter = self._parse_seat(from_seat)
