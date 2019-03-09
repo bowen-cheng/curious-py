@@ -1,6 +1,6 @@
-from closures_decorators import function_decorator
-from closures_decorators import Trace
-from closures_decorators import ClassDecorator
+from closures_decorators.decorators import function_decorator
+from closures_decorators.decorators import Trace
+from closures_decorators.decorators import ClassDecorator
 
 
 @ClassDecorator
