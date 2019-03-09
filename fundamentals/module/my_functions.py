@@ -21,7 +21,15 @@ def even_or_odd(number):
         return "odd"
 
 
-# When this file is directly executed, the "__name__" attribute of this module automatically has value "__main__"
+print("If you see this, it means I'm being imported, my __name__ = ", __name__)
+
 if __name__ == "__main__":
+    """
+    * When this file is directly executed, the "__name__" attribute of this module automatically has value "__main__"
+    * When this file is imported its __name__ attribute is "fundamentals.module.my_functions"
+    * If the following print statement is not placed in the "if __name__ == '__main__'" block, it will be executed when
+      this module is imported
+    """
     # call a list of functions here
     print("I'm being executed as a program")
+    print("My __name__ attr has value:", __name__)

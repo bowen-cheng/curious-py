@@ -1,12 +1,10 @@
-from closures_decorators.function_decorators import function_decorator
-from closures_decorators.instance_decorator import Trace
-from closures_decorators.class_decorator import ClassDecorator
-
-tracer = Trace()
+from closures_decorators import function_decorator
+from closures_decorators import Trace
+from closures_decorators import ClassDecorator
 
 
 @ClassDecorator
-@tracer
+@Trace()
 @function_decorator
 def multiple_decorator(x):
     """
@@ -15,6 +13,6 @@ def multiple_decorator(x):
     return x
 
 
-print(multiple_decorator("¥©çΩ≈"))
-print(multiple_decorator.count)  # count exists because the @ClassDecorator is the last decorator processed
-print("\n------------------\n")
+if __name__ == "__main__":
+    print(multiple_decorator("¥©çΩ≈"))
+    print(multiple_decorator.count)  # count exists because the @ClassDecorator is the last decorator processed

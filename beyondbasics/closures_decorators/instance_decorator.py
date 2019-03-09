@@ -22,12 +22,12 @@ class Trace:
         return wrap
 
 
-tracer = Trace()
-
-
 @Trace()  # note the trailing () when using instance decorator vs class decorator
 def print_words():
     print("A Star is Born")
+
+
+tracer = Trace()
 
 
 @tracer  # This works too
@@ -35,5 +35,7 @@ def print_words2():
     print("A Star is Born")
 
 
-print_words()
-print_words2()
+if __name__ == "__main__":
+    # Only run these demo code if the file is executed, not when it's imported
+    print_words()
+    print_words2()

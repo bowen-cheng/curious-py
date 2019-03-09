@@ -22,5 +22,7 @@ def with_decorator(x):
     return x
 
 
-print("test('¥©çΩ≈'):", without_decorator('¥©çΩ≈'))
-print("test_decorator('¥©çΩ≈'):", with_decorator('¥©çΩ≈'))
+if __name__ == "__main__":
+    # Only run these demo code if the file is executed, not when it's imported
+    print("test('¥©çΩ≈'):", without_decorator('¥©çΩ≈'))
+    print("test_decorator('¥©çΩ≈'):", with_decorator('¥©çΩ≈'))

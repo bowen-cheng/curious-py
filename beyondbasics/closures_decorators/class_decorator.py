@@ -30,11 +30,13 @@ def hello(name):
     print("Hello {}".format(name))
 
 
-hello("Bill")
-hello("Anna")
-hello("Josh")
-hello("Kate")
-# The new object by the name "hello" is no longer a function.
-# It is a callable object (with additional attribute "count")
-print("hello.count:", hello.count)
-print("type(hello):", type(hello))
+if __name__ == "__main__":
+    # Only run these demo code if the file is executed, not when it's imported
+    hello("Bill")
+    hello("Anna")
+    hello("Josh")
+    hello("Kate")
+    # The new object by the name "hello" is no longer a function.
+    # It is a callable object (with additional attribute "count")
+    print("hello.count:", hello.count)
+    print("type(hello):", type(hello))
