@@ -1,5 +1,4 @@
 class ShippingContainer:
-    # A class attribute is defined in a class but outside of any methods
     next_serial = 100
 
     @staticmethod  # The annotation makes the method static

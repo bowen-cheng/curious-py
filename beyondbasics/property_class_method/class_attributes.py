@@ -3,6 +3,7 @@ class ShippingContainer:
     next_serial = 100
 
     def __init__(self, attr):
+        # An instance attribute is (preferably) defined in the __init__ method
         self.instance_attribute = attr
         self.serial = ShippingContainer.next_serial
         ShippingContainer.next_serial += 1
