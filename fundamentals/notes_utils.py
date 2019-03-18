@@ -6,3 +6,7 @@ def print_items(iterable_input):
     """
     for items in iterable_input:
         print(items)
+
+
+def print_separator():
+    print("\n----------\n")
