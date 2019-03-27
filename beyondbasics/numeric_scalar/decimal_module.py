@@ -1,4 +1,4 @@
-from fundamentals.notes_utils import print_separator
+from notes_utils import print_separator
 from decimal import Decimal
 import decimal
 
@@ -32,4 +32,3 @@ if __name__ == "__main__":
     print_separator()
     print((-7) // 3)
     print(Decimal('-7') // Decimal('3'))
-

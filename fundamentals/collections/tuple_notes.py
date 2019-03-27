@@ -1,7 +1,7 @@
 # tuples are heterogeneous immutable sequence.
 # Once created, the objects within them cannot be replaced or removed and new elements cannot be added.
 
-from fundamentals.notes_utils import print_items
+from notes_utils import print_items
 
 # tuples are defined by "(", ")" and ","
 t = ("\nstring", 4.3, 6)

@@ -1,4 +1,4 @@
-from fundamentals.notes_utils import print_items
+from notes_utils import print_items
 
 # All variables are named references to objects
 a = [1, 2, 3]
