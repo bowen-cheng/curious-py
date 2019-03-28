@@ -54,6 +54,7 @@ class IntList(SimpleList):
 
     def add(self, item):
         self._validate(item)
+        # Depending on the calling context, this super() doesn't necessarily refer to the same class! (Unlike Java)
         super().add(item)
 
 
@@ -93,12 +94,8 @@ if __name__ == '__main__':
 
     print('\n--- isinstance ---')
     print('isinstance(sorted_list, SortedList)', isinstance(sorted_list, SortedList))
-    print('isinstance(sorted_list, SimpleList)', isinstance(sorted_list, SimpleList))
-    print('isinstance(int_list, IntList)', isinstance(int_list, IntList))
-    print('isinstance(int_list, SimpleList)', isinstance(int_list, SimpleList))
 
     print('\n--- issubclass ---')
-    print('issubclass(SortedList, SimpleList)', issubclass(SortedList, SimpleList))
     print('issubclass(IntList, SimpleList)', issubclass(IntList, SimpleList))
 
     print('\n--- Class.__base__ ---')
@@ -111,3 +108,10 @@ if __name__ == '__main__':
     pprint([' --- IntList.mro() ---', IntList.mro()], width=40)
     print('')
     pprint([' --- SortedIntList.mro() ---', SortedIntList.mro()])
+
+    print('\n--- super(...) proxy object ---')
+    # SortedIntList works because add() method always call super().add(...), see notes for more
+    print('Instance-bound proxy:')
+    print('super(SortedList, sorted_int_list).add', super(SortedList, sorted_int_list).add)
+    print('Class-bound proxy:')
+    print('super(SortedList, SortedIntList).add', super(SortedList, SortedIntList).add)
