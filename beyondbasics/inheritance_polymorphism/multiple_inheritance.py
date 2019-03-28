@@ -1,3 +1,6 @@
+from pprint import pprint
+
+
 class SimpleList:
     def __init__(self, items):
         print('SimpleList initialized')
@@ -66,21 +69,21 @@ class SortedIntList(IntList, SortedList):
 
 
 if __name__ == '__main__':
-    print('\n<<<SortedList>>>')
+    print('\n--- SortedList ---')
     sorted_list = SortedList()
     sorted_list.add(10)
     sorted_list.add(-10)
     sorted_list.add(20)
     print(sorted_list)
 
-    print('\n<<<IntList>>>')
+    print('\n--- IntList ---')
     int_list = IntList()
     int_list.add(1)
     int_list.add(2)
     # int_list.add('a')  # Raises ValueError, only numbers are allowed
     print(int_list)
 
-    print('\n<<<SortedIntList>>>')
+    print('\n--- SortedIntList ---')
     sorted_int_list = SortedIntList()
     sorted_int_list.add(10)
     sorted_int_list.add(-10)
@@ -88,22 +91,23 @@ if __name__ == '__main__':
     # sorted_int_list.add('abc')  # Raises ValueError, only numbers are allowed
     print(sorted_int_list)
 
-    print('\n<<<isinstance>>>')
+    print('\n--- isinstance ---')
     print('isinstance(sorted_list, SortedList)', isinstance(sorted_list, SortedList))
     print('isinstance(sorted_list, SimpleList)', isinstance(sorted_list, SimpleList))
     print('isinstance(int_list, IntList)', isinstance(int_list, IntList))
     print('isinstance(int_list, SimpleList)', isinstance(int_list, SimpleList))
 
-    print('\n<<<issubclass>>>')
+    print('\n--- issubclass ---')
     print('issubclass(SortedList, SimpleList)', issubclass(SortedList, SimpleList))
     print('issubclass(IntList, SimpleList)', issubclass(IntList, SimpleList))
 
-    print('\n<<<Class.__base__>>>')
+    print('\n--- Class.__base__ ---')
     # Class.__base__ returns a tuple of base classes
     print('IntList.__bases__', IntList.__bases__)
     print('SortedIntList.__bases__', SortedIntList.__bases__)
 
-    print('\n<<<Class.__mro__>>>')
-    # Class.__mro__ returns method resolution order of class
-    print('IntList.__mro__', IntList.__mro__)
-    print('SortedIntList.__mro__', SortedIntList.__mro__)
+    print('\n--- Class.__mro__ ---')
+    # Class.__mro__ or Class.mro() returns method resolution order of class
+    pprint([' --- IntList.mro() ---', IntList.mro()], width=40)
+    print('')
+    pprint([' --- SortedIntList.mro() ---', SortedIntList.mro()])
